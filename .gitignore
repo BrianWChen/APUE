@@ -1,0 +1,6 @@
+# ignore .o & .a file
+*.[oa]
+# ignore a.out
+a.out
+# ignore *~ file
+*~
