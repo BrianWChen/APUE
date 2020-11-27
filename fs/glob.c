@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <glob.h>
 
-#define PAT "/etc/a*.conf"
+//#define PAT "/etc/a*.conf"
+#define PAT "/etc/*"
 
 /* int errfunc_(const char *errpath, int errno)
 {
@@ -14,18 +15,17 @@
 int main()
 {
 	glob_t globres;
-	int err;
+	int i, err;
 
-    err = glob(PAT, 0. NULL, &globres);
+    err = glob(PAT, 0, NULL, &globres);
     if (err)
     {
     	printf("Error code = %d\n", err);
     	exit(1);
     }
 
-    for (int i = 0; i < globres.gl_pathc; i++)
+    for (i = 0; i < globres.gl_pathc; i++)
     {
-
     	puts(globres.gl_pathv[i]);
     }
 
