@@ -11,10 +11,10 @@
 
 int main(int argc, char **argv)
 {
-    int sfd, dfd, len, ret, pos;
+    int sfd, dfd = 1, len, ret, pos;
     char buf[BUFSIZE];
 
-    if (argc < 3)
+    if (argc < 2)
     {
         fprintf(stderr, "Usage...\n");
         exit(1);
@@ -33,20 +33,6 @@ int main(int argc, char **argv)
         }
     } while  (sfd < 0);
 
-    do
-    {
-        dfd = open(argv[2], O_WRONLY|O_CREAT|O_TRUNC, 0600);
-        if( dfd < 0 )
-        {
-            if (errno != EINTR)
-            {
-                close(dfd);
-                perror("open()");
-                exit(1);
-            }
-        }
-    } while (dfd < 0);
-    
     while(1)
     {
         len = read(sfd, buf, BUFSIZE);
@@ -81,7 +67,6 @@ int main(int argc, char **argv)
         }
     }
 
-    close(dfd);
     close(sfd);
 
     exit(0);
